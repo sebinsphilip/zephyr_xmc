@@ -1,0 +1,2 @@
+add_subdirectory_ifdef(CONFIG_KTD202x ktd202x)
+add_subdirectory_ifdef(CONFIG_PCA9956B pca9956b)

@@ -1,0 +1,7 @@
+config CCU4_0_TIMER_XMC
+	bool "XMC CCU4_0 timer slice driver"
+	default n
+	select TICKLESS_CAPABLE
+	help
+	  This module implements a kernel device driver for  XMC CCU4_0 timer slice
+	  and provides the standard "system clock driver" interfaces.

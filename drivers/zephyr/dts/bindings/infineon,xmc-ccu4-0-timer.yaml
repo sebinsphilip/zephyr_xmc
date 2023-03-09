@@ -1,0 +1,15 @@
+description: XMC CCU4 timer node
+
+compatible: "infineon,xmc-ccu4-0-timer"
+
+include: [base.yaml]
+
+properties:
+    reg:
+      required: true
+
+    label:
+      required: true
+      
+    interrupts:
+      required: true

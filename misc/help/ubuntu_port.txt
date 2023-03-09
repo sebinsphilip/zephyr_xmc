@@ -1,0 +1,22 @@
+.vscode/
+settings.json>
+                "cmake.cmakePath": "/snap/cmake/current/bin/cmake",
+launch.json>
+                "serverpath": "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+                "showDevDebugOutput": true
+cmake-kits.json>
+                "environmentSetupScript": "${workspaceFolder}/.venv/bin/activate",
+                >> rename "compilers": {"C": and "CXX" *.exe and correct path}
+
+
+>> chnage GNU ARM embedded toolchain
+>> check for .venv 
+>> rename "prj.debug.conf" to "prj.Debug.conf"
+    
+>> create ".venv" in the current xmc-template folder (python3 -m venv /home/sebin/thesis/zephyr-xmc-template/.venv/)
+>> (.venv) sebin@sebin:~/thesis/zephyr-xmc-template$ pip3 install --user -r requirements.txt 
+
+
+git update-index --skip-worktree <file>
+to ignore the changes in a tracked file (ref:https://stackoverflow.com/a/20241145)
+

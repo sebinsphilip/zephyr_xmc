@@ -1,0 +1,10 @@
+config TMUX1208
+	bool "TMUX1208 5V Bidirectional 8:1, 1-Channel Multiplexer"
+	depends on GPIO
+	help
+	  Enable driver for TMUX1208.
+
+	  The TMUX1208 is a general purpose complementary metal-oxide semiconductor (CMOS) multiplexers (MUX). 
+	  The TMUX1208 offers 8:1 single-ended channels. Wide operating supply of 1.08 V to 5.5 V allows for use in a broad array of applications 
+	  from personal electronics to building automation applications. 
+	  The device supports bidirectional analog and digital signals on the source (Sx) and drain (D) pins ranging from GND to VDD.

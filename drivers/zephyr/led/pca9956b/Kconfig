@@ -1,0 +1,8 @@
+config PCA9956B
+	bool "PCA9956B LED driver"
+	depends on I2C
+	help
+	  Enable LED driver for PCA9956B.
+
+	  PCA9956B LED driver has 24 channels constant current LED-driver. Each channel can drive up to
+	  57 mA per channel at 20 V input voltage.

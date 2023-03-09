@@ -1,0 +1,157 @@
+/dts-v1/;
+
+/ {
+	#address-cells = < 0x1 >;
+	#size-cells = < 0x1 >;
+	model = "KAI uMoPS XMC4500";
+	compatible = "kai,umops-xmc45", "infineon,xmc4500", "infineon,xmc4xxx";
+	chosen {
+		zephyr,sram = &dsram1;
+		zephyr,flash = &flash0;
+		zephyr,console = &usic1ch1;
+		zephyr,shell-uart = &usic1ch1;
+	};
+	aliases {
+		sw0 = &button0;
+	};
+	soc {
+		#address-cells = < 0x1 >;
+		#size-cells = < 0x1 >;
+		compatible = "simple-bus";
+		interrupt-parent = < &nvic >;
+		ranges;
+		nvic: interrupt-controller@e000e100 {
+			#address-cells = < 0x1 >;
+			compatible = "arm,v7m-nvic";
+			reg = < 0xe000e100 0xc00 >;
+			interrupt-controller;
+			#interrupt-cells = < 0x2 >;
+			arm,num-irq-priority-bits = < 0x6 >;
+			phandle = < 0x1 >;
+		};
+		systick: timer@e000e010 {
+			compatible = "arm,armv7m-systick";
+			reg = < 0xe000e010 0x10 >;
+		};
+		usic0ch0: usic@40030000 {
+			reg = < 0x40030000 0x1ff >;
+			clocks = < &sysclk >;
+			status = "disabled";
+		};
+		usic0ch1: usic@40030200 {
+			reg = < 0x40030200 0x1ff >;
+			clocks = < &sysclk >;
+			status = "disabled";
+		};
+		usic1ch0: usic@48020000 {
+			reg = < 0x48020000 0x1ff >;
+			clocks = < &sysclk >;
+			status = "okay";
+			compatible = "infineon,xmc4xxx-uart";
+			current-speed = < 0x1c200 >;
+			label = "UART_4";
+		};
+		usic1ch1: usic@48020200 {
+			reg = < 0x48020200 0x1ff >;
+			clocks = < &sysclk >;
+			status = "okay";
+			compatible = "infineon,xmc4xxx-uart";
+			current-speed = < 0x1c200 >;
+			label = "UART_0";
+		};
+		usic2ch0: usic@48024000 {
+			reg = < 0x48024000 0x1ff >;
+			clocks = < &sysclk >;
+			status = "disabled";
+		};
+		usic2ch1: usic@48024200 {
+			reg = < 0x48024200 0x1ff >;
+			clocks = < &sysclk >;
+			status = "disabled";
+		};
+		scu_clk: clock@50004600 {
+			compatible = "infineon,xmc-clock";
+			reg = < 0x50004600 0x38 >;
+			status = "okay";
+			label = "SCU_CLK";
+		};
+		ccu4_0_counter: counter@4000c100 {
+			compatible = "infineon,xmc-ccu4-0-counter";
+			reg = < 0x4000c100 0xb4 0x4000c000 0x84 >;
+			prescale = < 0xf >;
+			label = "CCU4_0_COUNTER";
+			interrupts = < 0x2c 0x0 >;
+			status = "okay";
+		};
+		mux0: mux_0 {
+			status = "okay";
+			compatible = "ti,tmux1208";
+			label = "Mux 0";
+			addr-gpios = < 0x0 0x1 0x2 >;
+		};
+		mux1: mux_1 {
+			status = "okay";
+			compatible = "ti,tmux1208";
+			label = "Mux 1";
+			addr-gpios = < 0x3 0x4 0x5 >;
+		};
+		gpio1: gpio@48028100 {
+			compatible = "infineon,xmc-gpio";
+			gpio-controller;
+			reg = < 0x48028100 0x100 >;
+			#gpio-cells = < 0x2 >;
+			label = "GPIO_1";
+			status = "okay";
+			port = < 0x1 >;
+			phandle = < 0x3 >;
+		};
+		buttons {
+			compatible = "gpio-keys";
+			button0: button_0 {
+				gpios = < &gpio1 0xd 0x2711 >;
+				label = "User button";
+			};
+		};
+		xethernet: ethernet@5000c000 {
+			compatible = "infineon,xmc-ethernet";
+			reg = < 0x5000c000 0x105c >;
+			interrupts = < 0x6c 0x0 >;
+			status = "okay";
+			label = "xmc_ethernet";
+		};
+	};
+	cpus {
+		#address-cells = < 0x1 >;
+		#size-cells = < 0x0 >;
+		cpu0: cpu@0 {
+			compatible = "arm,cortex-m4f";
+			reg = < 0x0 >;
+			clock-frequency = < 0x7270e00 >;
+		};
+	};
+	psram1: memory@10000000 {
+		compatible = "mmio-sram";
+		reg = < 0x10000000 0x10000 >;
+		status = "okay";
+	};
+	dsram1: memory@20000000 {
+		compatible = "mmio-sram";
+		reg = < 0x20000000 0x10000 >;
+		status = "okay";
+	};
+	sdram2: memory@30000000 {
+		compatible = "mmio-sram";
+		reg = < 0x30000000 0x8000 >;
+		status = "okay";
+	};
+	flash0: serial-flash@8000000 {
+		compatible = "serial-flash";
+		reg = < 0x8000000 0x100000 >;
+	};
+	sysclk: system-clock {
+		compatible = "fixed-clock";
+		clock-frequency = < 0x7270e00 >;
+		#clock-cells = < 0x0 >;
+		phandle = < 0x2 >;
+	};
+};

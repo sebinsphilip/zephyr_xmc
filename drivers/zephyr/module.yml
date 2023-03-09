@@ -1,0 +1,4 @@
+name: umops-drivers
+build:
+  settings:
+    dts_root: zephyr

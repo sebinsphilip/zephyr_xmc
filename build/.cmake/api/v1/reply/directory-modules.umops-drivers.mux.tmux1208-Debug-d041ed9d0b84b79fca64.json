@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "modules/umops-drivers/mux/tmux1208",
+		"source" : "drivers/zephyr/mux/tmux1208"
+	}
+}

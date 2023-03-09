@@ -1,0 +1,2 @@
+zephyr_library()
+zephyr_library_sources_ifdef(CONFIG_CLOCK_CONTROL_XMC clock_control_xmc.c)

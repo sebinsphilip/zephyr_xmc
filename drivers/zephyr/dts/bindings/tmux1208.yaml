@@ -1,0 +1,18 @@
+compatible: "ti,tmux1208"
+
+description: TMUX1208 driver
+properties:
+  addr-gpios:
+    type: array
+    required: false
+    description: Address-GPIOs in the order ad0, ad1, ad2.
+  
+  en-gpios:
+    type: phandle-array
+    required: false
+    description: Optional Enable-GPIOs.
+
+  label:
+    type: string
+    required: false
+    description: Human readable string describing the device (used as device_get_binding() argument)

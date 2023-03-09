@@ -1,0 +1,8 @@
+add_subdirectory(led)
+add_subdirectory(mux)
+add_subdirectory(gpio)
+add_subdirectory(clock_control)
+#add_subdirectory(timer)
+add_subdirectory(counter)
+add_subdirectory(ethernet)
+zephyr_include_directories(./include)

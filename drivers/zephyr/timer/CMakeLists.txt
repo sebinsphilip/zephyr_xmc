@@ -1,0 +1,2 @@
+zephyr_library()
+zephyr_library_sources_ifdef(CONFIG_CCU4_0_TIMER_XMC ccu4_0_timer_xmc.c)

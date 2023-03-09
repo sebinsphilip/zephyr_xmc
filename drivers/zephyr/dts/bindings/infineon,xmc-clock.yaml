@@ -1,0 +1,12 @@
+description: XMC clock node
+
+compatible: "infineon,xmc-clock"
+
+include: [base.yaml]
+
+properties:
+    reg:
+      required: true
+
+    label:
+      required: true

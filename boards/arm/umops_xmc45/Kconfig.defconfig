@@ -1,0 +1,6 @@
+if BOARD_UMPOS_XMC45
+
+config BOARD
+	default "umops_xmc45"
+
+endif # BOARD_UMPOS_XMC45

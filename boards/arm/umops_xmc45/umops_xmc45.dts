@@ -1,0 +1,128 @@
+/dts-v1/;
+#include <infineon/xmc4500.dtsi>
+
+/ {
+	model = "KAI uMoPS XMC4500";
+	compatible = "kai,umops-xmc45", "infineon,xmc4500",
+						"infineon,xmc4xxx";
+
+	aliases {
+				sw0 = &button0;
+	};
+
+	chosen {
+		zephyr,sram = &dsram1;
+		zephyr,flash = &flash0;
+		zephyr,console = &usic1ch1;
+		zephyr,shell-uart = &usic1ch1;
+	};
+
+	soc {
+
+		scu_clk: clock@50004600 {
+			compatible = "infineon,xmc-clock";
+			reg = <0x50004600 0x38>; // SCU_CLK
+			status="okay";
+			label = "SCU_CLK";
+		};
+/*
+		ccu4_0:timer@4000c100 {
+			compatible = "infineon,xmc-ccu4-0-timer";
+			reg = <0x4000c100 0xb4>;
+			label = "CCU4_0_TIMER";
+			interrupts = <44 0>; //CCU40_0_IRQn
+			status = "okay";
+		};
+
+*/
+		ccu4_0_counter:counter@4000c100 {
+			compatible = "infineon,xmc-ccu4-0-counter";
+			reg = <0x4000c100 0xb4
+			       0x4000C000 0x84>;
+			prescale = <15>;
+			label = "CCU4_0_COUNTER";
+			interrupts = <44 0>; //CCU40_0_IRQn
+			status = "okay";
+		};
+
+		mux0: mux_0 {
+			status = "okay";
+			compatible = "ti,tmux1208";
+			label = "Mux 0";
+
+			addr-gpios = <0 1 2>;		 
+		};
+
+		mux1: mux_1 {
+			status = "okay";
+			compatible = "ti,tmux1208";
+			label = "Mux 1";
+
+			addr-gpios = <3 4 5>;		 
+		};
+
+
+		gpio1: gpio@48028100 {
+			compatible = "infineon,xmc-gpio";
+			gpio-controller;
+			reg = <0x48028100 0x100>;
+			#gpio-cells = <2>;
+			label = "GPIO_1";
+			status = "okay";
+			//interrupts = <5 0>; --need to add later if we decide to add interrupt-parent (ERU) into dts
+			port = <1>;
+		};
+
+	
+		buttons {
+			compatible = "gpio-keys";
+			button0: button_0 {
+				gpios = <&gpio1 13 10001>; //13- pin number, 10001- (GPIO_PULL_UP | GPIO_ACTIVE_LOW)
+				label = "User button";
+			};
+		};
+
+		xethernet: ethernet@5000c000 {
+			compatible = "infineon,xmc-ethernet";
+			reg = <0x5000c000 0x105c>;
+			interrupts = <108 0>; //ETH0_0_IRQHandler
+			status = "okay";
+			label = "xmc_ethernet";
+			//clocks = <&sim KINETIS_SIM_CORESYS_CLK 0 0>;
+		};
+
+		
+
+	};
+
+};
+
+&cpu0 {
+	clock-frequency = <120000000>;
+};
+
+&usic1ch0 {
+	compatible = "infineon,xmc4xxx-uart";
+	current-speed = <115200>;
+	label = "UART_4";
+	status = "okay";
+};
+
+&usic1ch1 {
+	compatible = "infineon,xmc4xxx-uart";
+	current-speed = <115200>;
+	label = "UART_0";
+	status = "okay";
+};
+
+&sdram2 {
+	status = "okay";
+};
+
+&psram1 {
+	status = "okay";
+};
+
+&dsram1 {
+	status = "okay";
+};

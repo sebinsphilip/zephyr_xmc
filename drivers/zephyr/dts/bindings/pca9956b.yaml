@@ -1,0 +1,18 @@
+compatible: "nxp,pca9956b"
+description: PCA9956B LED driver
+
+include: ["i2c-device.yaml", "led-controller.yaml"]
+
+properties:
+  ramp-factor:
+    type: int
+    required: no
+    default: 0
+    description: When value greater than 0, a smooth transission between brightness changes is applied (calls are blocking until transission is done).
+
+  current_scaling:
+    type: int
+    required: no
+    default: 255
+    description: Factor is applied to all registers IREF0 to IREF23 on startup.
+ 

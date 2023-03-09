@@ -1,0 +1,27 @@
+description: XMC GPIO node
+
+compatible: "infineon,xmc-gpio"
+
+include: [gpio-controller.yaml, base.yaml]
+
+properties:
+    reg:
+      required: true
+
+    label:
+      required: true
+
+    "#gpio-cells":
+      const: 2
+
+    port:
+      type: int
+      required: true
+      description: |
+        The GPIO port number. GPIO port P1 has:
+
+          port = <1>;
+
+gpio-cells:
+  - pin
+  - flags

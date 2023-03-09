@@ -1,0 +1,9 @@
+comment "Device Drivers"
+
+rsource "led/Kconfig"
+rsource "mux/Kconfig"
+rsource "gpio/Kconfig"
+rsource "clock_control/Kconfig"
+rsource "counter/Kconfig"
+rsource "ethernet/Kconfig"
+#rsource "timer/Kconfig"

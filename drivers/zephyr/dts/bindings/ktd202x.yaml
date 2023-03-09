@@ -1,0 +1,23 @@
+compatible: "kt,ktd202x"
+description: KTD202x LED driver
+
+include: ["i2c-device.yaml", "led-controller.yaml"]
+
+properties:
+  ramp-time-rise:
+    type: int
+    required: no
+    default: 4
+    description: Set the rise time durations for the LED current ramp transitioning between 0mA and the nominal current. Refer to datasheet for details.
+
+  ramp-time-fall:
+    type: int
+    required: no
+    default: 4
+    description: Set the fall time durations for the LED current ramp transitioning between 0mA and the nominal current. Refer to datasheet for details.
+ 
+  ramp-time-scaling:
+    type: int
+    required: no
+    default: 0
+    description: These setting allow to scale the rise and fall times. Refer to datasheet for details.

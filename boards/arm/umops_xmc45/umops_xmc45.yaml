@@ -1,0 +1,12 @@
+identifier: umops_xmc45
+name: KAI Micro-MoPS xmc45
+type: mcu
+arch: arm
+toolchain:
+  - zephyr
+  - gnuarmemb
+  - xtools
+supported:
+  - gpio
+ram: 160
+flash: 1024

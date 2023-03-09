@@ -1,0 +1,273 @@
+# 1 "/home/sebin/thesis/zephyrproject/zephyr/misc/empty_file.c"
+# 1 "<built-in>"
+# 1 "<command-line>"
+# 1 "/home/sebin/thesis/dmz/zephyr_xmc_template/boards/arm/umops_xmc45/umops_xmc45.dts" 1
+/dts-v1/;
+# 1 "/home/sebin/thesis/zephyrproject/zephyr/dts/arm/infineon/xmc4500.dtsi" 1 3 4
+
+
+
+
+
+
+
+# 1 "/home/sebin/thesis/zephyrproject/zephyr/dts/common/mem.h" 1 3 4
+# 9 "/home/sebin/thesis/zephyrproject/zephyr/dts/arm/infineon/xmc4500.dtsi" 2 3 4
+# 1 "/home/sebin/thesis/zephyrproject/zephyr/dts/arm/infineon/xmc4xxx.dtsi" 1 3 4
+
+
+
+
+
+
+
+# 1 "/home/sebin/thesis/zephyrproject/zephyr/dts/arm/armv7-m.dtsi" 1 3 4
+
+
+# 1 "/home/sebin/thesis/zephyrproject/zephyr/dts/common/skeleton.dtsi" 1 3 4
+# 9 "/home/sebin/thesis/zephyrproject/zephyr/dts/common/skeleton.dtsi" 3 4
+/ {
+ #address-cells = <1>;
+ #size-cells = <1>;
+ chosen { };
+ aliases { };
+};
+# 4 "/home/sebin/thesis/zephyrproject/zephyr/dts/arm/armv7-m.dtsi" 2 3 4
+
+/ {
+ soc {
+  #address-cells = <1>;
+  #size-cells = <1>;
+  compatible = "simple-bus";
+  interrupt-parent = <&nvic>;
+  ranges;
+
+  nvic: interrupt-controller@e000e100 {
+   #address-cells = <1>;
+   compatible = "arm,v7m-nvic";
+   reg = <0xe000e100 0xc00>;
+   interrupt-controller;
+   #interrupt-cells = <2>;
+  };
+
+  systick: timer@e000e010 {
+   compatible = "arm,armv7m-systick";
+   reg = <0xe000e010 0x10>;
+  };
+ };
+};
+# 9 "/home/sebin/thesis/zephyrproject/zephyr/dts/arm/infineon/xmc4xxx.dtsi" 2 3 4
+
+/ {
+ cpus {
+  #address-cells = <1>;
+  #size-cells = <0>;
+
+  cpu0: cpu@0 {
+   compatible = "arm,cortex-m4f";
+   reg = <0>;
+  };
+ };
+
+
+ psram1: memory@10000000 {
+  compatible = "mmio-sram";
+ };
+
+ dsram1: memory@20000000 {
+  compatible = "mmio-sram";
+ };
+
+ sdram2: memory@30000000 {
+  compatible = "mmio-sram";
+ };
+
+ flash0: serial-flash@8000000 {
+  compatible = "serial-flash";
+ };
+
+ sysclk: system-clock {
+  compatible = "fixed-clock";
+  clock-frequency = <120000000>;
+  #clock-cells = <0>;
+ };
+
+ soc {
+  usic0ch0: usic@40030000 {
+   reg = <0x40030000 0x1ff>;
+   clocks = <&sysclk>;
+   status = "disabled";
+  };
+
+  usic0ch1: usic@40030200 {
+   reg = <0x40030200 0x1ff>;
+   clocks = <&sysclk>;
+   status = "disabled";
+  };
+
+  usic1ch0: usic@48020000 {
+   reg = <0x48020000 0x1ff>;
+   clocks = <&sysclk>;
+   status = "disabled";
+  };
+
+  usic1ch1: usic@48020200 {
+   reg = <0x48020200 0x1ff>;
+   clocks = <&sysclk>;
+   status = "disabled";
+  };
+
+  usic2ch0: usic@48024000 {
+   reg = <0x48024000 0x1ff>;
+   clocks = <&sysclk>;
+   status = "disabled";
+  };
+
+  usic2ch1: usic@48024200 {
+   reg = <0x48024200 0x1ff>;
+   clocks = <&sysclk>;
+   status = "disabled";
+  };
+ };
+};
+
+&nvic {
+ arm,num-irq-priority-bits = <6>;
+};
+# 10 "/home/sebin/thesis/zephyrproject/zephyr/dts/arm/infineon/xmc4500.dtsi" 2 3 4
+
+&psram1 {
+ reg = <0x10000000 ((64) * 1024)>;
+};
+
+&dsram1 {
+ reg = <0x20000000 ((64) * 1024)>;
+};
+
+&sdram2 {
+ reg = <0x30000000 ((32) * 1024)>;
+};
+
+&flash0 {
+ reg = <0x8000000 ((1) * 1024 * 1024)>;
+};
+# 3 "/home/sebin/thesis/dmz/zephyr_xmc_template/boards/arm/umops_xmc45/umops_xmc45.dts" 2
+
+/ {
+ model = "KAI uMoPS XMC4500";
+ compatible = "kai,umops-xmc45", "infineon,xmc4500",
+      "infineon,xmc4xxx";
+
+ aliases {
+    sw0 = &button0;
+ };
+
+ chosen {
+  zephyr,sram = &dsram1;
+  zephyr,flash = &flash0;
+  zephyr,console = &usic1ch1;
+  zephyr,shell-uart = &usic1ch1;
+ };
+
+ soc {
+
+  scu_clk: clock@50004600 {
+   compatible = "infineon,xmc-clock";
+   reg = <0x50004600 0x38>;
+   status="okay";
+   label = "SCU_CLK";
+  };
+# 38 "/home/sebin/thesis/dmz/zephyr_xmc_template/boards/arm/umops_xmc45/umops_xmc45.dts"
+  ccu4_0_counter:counter@4000c100 {
+   compatible = "infineon,xmc-ccu4-0-counter";
+   reg = <0x4000c100 0xb4
+          0x4000C000 0x84>;
+   prescale = <15>;
+   label = "CCU4_0_COUNTER";
+   interrupts = <44 0>;
+   status = "okay";
+  };
+
+  mux0: mux_0 {
+   status = "okay";
+   compatible = "ti,tmux1208";
+   label = "Mux 0";
+
+   addr-gpios = <0 1 2>;
+  };
+
+  mux1: mux_1 {
+   status = "okay";
+   compatible = "ti,tmux1208";
+   label = "Mux 1";
+
+   addr-gpios = <3 4 5>;
+  };
+
+
+  gpio1: gpio@48028100 {
+   compatible = "infineon,xmc-gpio";
+   gpio-controller;
+   reg = <0x48028100 0x100>;
+   #gpio-cells = <2>;
+   label = "GPIO_1";
+   status = "okay";
+
+   port = <1>;
+  };
+
+
+  buttons {
+   compatible = "gpio-keys";
+   button0: button_0 {
+    gpios = <&gpio1 13 10001>;
+    label = "User button";
+   };
+  };
+
+  xethernet: ethernet@5000c000 {
+   compatible = "infineon,xmc-ethernet";
+   reg = <0x5000c000 0x105c>;
+   interrupts = <108 0>;
+   status = "okay";
+   label = "xmc_ethernet";
+
+  };
+
+
+
+ };
+
+};
+
+&cpu0 {
+ clock-frequency = <120000000>;
+};
+
+&usic1ch0 {
+ compatible = "infineon,xmc4xxx-uart";
+ current-speed = <115200>;
+ label = "UART_4";
+ status = "okay";
+};
+
+&usic1ch1 {
+ compatible = "infineon,xmc4xxx-uart";
+ current-speed = <115200>;
+ label = "UART_0";
+ status = "okay";
+};
+
+&sdram2 {
+ status = "okay";
+};
+
+&psram1 {
+ status = "okay";
+};
+
+&dsram1 {
+ status = "okay";
+};
+# 1 "<command-line>" 2
+# 1 "/home/sebin/thesis/zephyrproject/zephyr/misc/empty_file.c"

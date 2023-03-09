@@ -1,0 +1,6 @@
+config CCU4_COUNTER_XMC
+	bool "XMC CCU4_0 timer slice driver"
+	default y
+	help
+	  This module implements a kernel device driver for  XMC CCU4_0 timer slice
+	  and provides the standard "system clock driver" interfaces.

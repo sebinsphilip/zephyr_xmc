@@ -1,0 +1,8 @@
+config KTD202x
+	bool "KTD202x LED driver"
+	depends on I2C
+	help
+	  Enable LED driver for KTD202x.
+
+	  KTD202x LED driver has 3 or 4 channels (RGBW). Each channel can drive up to
+	  24 mA per LED.

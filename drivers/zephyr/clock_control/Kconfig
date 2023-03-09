@@ -1,0 +1,5 @@
+config CLOCK_CONTROL_XMC
+	bool "XMC Clock driver"
+	default y
+	help
+	  Enable XMC clock driver.

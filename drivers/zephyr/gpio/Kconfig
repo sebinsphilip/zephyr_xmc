@@ -1,0 +1,7 @@
+config GPIO_XMC
+	bool "GPIO driver"
+	default y
+	help
+	  Enable GPIO.
+
+	  Enable GPIO driver
