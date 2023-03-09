@@ -1,5 +1,5 @@
 
-# KAI :heart: Zephyr
+# Zephyr XMC Ethernet
 This template provides a basic setup to develop an _out-of-tree_ Zephyr RTOS application with Visual Studio Code.
 
 ## Install dependencies
