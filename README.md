@@ -17,3 +17,5 @@ All other important drivers for the SOC pheripherals are also implemented in the
 
 The proposed ethenret communication data flow accomodating both critical and non-critical data is shown below.
 ![alt text](https://github.com/sebinsphilip/zephyr_xmc/blob/main/proposed.png?raw=true)
+
+Refer the full report ["Sebin_ShajiPhilip_thesis_compressed.pdf"](Sebin_ShajiPhilip_thesis_compressed.pdf)  for detailed info.
